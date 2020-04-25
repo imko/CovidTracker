@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Line, Bar } from 'react-chartjs-2';
+import { Line, Bar, Doughnut } from 'react-chartjs-2';
 import { fetchDailyData } from '../../api';
 
 import styles from './Chart.module.css';
 
-const Chart = ({ data, country }) => {
+const Chart = ({ data, country, showBarChart }) => {
     const [dailyData, setDailyDate] = useState([]);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const Chart = ({ data, country }) => {
         <Line data={{
                 labels: dailyData.map(({ date }) => date),
                 datasets: [{
-                    label: 'Infected',
+                    label: 'Confirmed',
                     data: dailyData.map(({ confirmed }) => confirmed),
                     borderColor: '#438DB6',
                     fill: true
@@ -39,7 +39,7 @@ const Chart = ({ data, country }) => {
             (
                 <Bar
                     data={{
-                        labels: ['Infected', 'Recovered', 'Deaths'],
+                        labels: ['Confirmed', 'Recovered', 'Deaths'],
                         datasets: [{
                             label: 'People',
                             backgroundColor: ['#438DB6', '#C2DDD0', '#E77158'],
@@ -54,9 +54,25 @@ const Chart = ({ data, country }) => {
             ) : null
     );
 
+    const doughnutChart = (
+        data ? (
+            <Doughnut
+                data={{
+                    labels: ['Confirmed', 'Recovered', 'Deaths'],
+                    datasets: [{
+                        backgroundColor: ['#438DB6', '#C2DDD0', '#E77158'],
+                        data: [data.confirmed.value, data.recovered.value, data.deaths.value],
+                        hoverBackgroundColor: ['#3B8BCC', '#C5E8D7', '#F56F53'],
+                        hoverBorderColor: ['#4EA4D4', '#C2DDD0', '#E77158']
+                    }]
+                }}
+            />
+        ) : null
+    );
+
     return (
         <div className={styles.container}>
-            {country ? barChart : lineChart}
+            {country ? (showBarChart ? barChart : doughnutChart) : lineChart}
         </div>
     );
 };

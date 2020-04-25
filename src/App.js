@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
-import { Cards, Chart, CountryPicker } from './components';
+import { Cards, Chart, CountryPicker, Header } from './components';
 import { fetchData } from './api';
 
 import styles from './App.module.css';
-import covidImage from './images/covid-19.png';
 
 const App = () => {
     const [data, setData] = useState(null);
     const [country, setCountry] = useState('');
+    const [showBarChart, setShowBarChart] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -23,12 +23,23 @@ const App = () => {
         setCountry(country);
     };
 
+    const handleToggleChartOnChange = () => setShowBarChart(!showBarChart);
+
     return (
         <div className={styles.container}>
-            <img className={styles.image} src={covidImage} alt="COVID-19" />
+            <Header/>
             <Cards data={data}/>
-            <CountryPicker handleCountryOnChange={handleCountryOnChange} />
-            <Chart data={data} country={country} />
+            <CountryPicker
+                country={country}
+                handleCountryOnChange={handleCountryOnChange}
+                showBarChart={showBarChart}
+                handleToggleChartOnChange={handleToggleChartOnChange}
+            />
+            <Chart
+                data={data}
+                country={country}
+                showBarChart={showBarChart}
+            />
         </div>
     );
 };
