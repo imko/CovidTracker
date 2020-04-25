@@ -29,7 +29,7 @@ const CountryPicker = ({ country, handleCountryOnChange, showBarChart, handleTog
             <Grid item>
                 {country
                     ? (<Button
-                        variant="contained outlined"
+                        variant="outlined"
                         color="primary"
                         className={styles.toggleButton}
                         startIcon={showBarChart ? <DonutLargeRounded fontSize="large" /> : <BarChartRounded fontSize="large" />}
