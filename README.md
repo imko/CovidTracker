@@ -4,7 +4,7 @@ https://covidtrack-r.herokuapp.com/
 ## About covidtrack-r 
 There are already many great COVID-19 trackers online, and I wanted to be part of the community who provides great services to the world. Althought many online COVID-19 trackers are amazing, there were some tools that may be too complex or screen full of data which may overwhelm the users. Hence, I created covidtrack-r which provides simple UI with all the essential data. 
 
-## Usage 
+### Usage 
 This application shows various graphs of COVID-19 data around the world, such as number of confirmed cases, recovered cases, and deaths. Also, user can choose any country and it will provide details about the country. 
 
 ### Built With 
