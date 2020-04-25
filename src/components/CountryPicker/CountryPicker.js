@@ -14,7 +14,7 @@ const CountryPicker = ({ country, handleCountryOnChange, showBarChart, handleTog
             const res = await fetchCountries();
             setCountries(res);
         })();
-    }, [countries]);
+    }, []);
 
     return (
         <Grid container direction="column" alignItems="center" justify="center">
